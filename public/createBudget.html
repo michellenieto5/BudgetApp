@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense and Income Tracker</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <link href="../style/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="grid-container">
+  <form id="linkButton">
+    <button class="link-button"><a href="index.html">Home</a></button>
+    <button class="link-button"><a href="createBudget.html">Create Budget</a></button>
+    <button class="link-button"><a href="suggestions.html">Suggestions</a></button>
+    <button class="link-button"><a href="download.html">Download</a></button>
+	</form>
+
+  <form id="budgetForm">
+  <h1>Expense and Income Tracker</h1>
+  <fieldset>
+    <legend>Income </legend>
+    <div id="incomeContainer">
+      <div class="incomeItem">
+        <input type="text" name="incomeSource[]" placeholder="Paycheck" required>
+
+        <input type="number" name="incomeAmount[]" placeholder="$0.00" required>
+        <p></p>
+        <input type="text" name="incomeSource[]" placeholder="Paycheck 2" required>
+
+        <input type="number" name="incomeAmount[]" placeholder="$0.00" required>
+      </div>
+    </div>
+    <div class="IncomeAndExpensesControls">
+      <p></p>
+      <button type="button" onclick="addIncome()">Add Income</button>
+      <span id="incomeTotalAmount">$0.00</span>
+    </div>
+  </fieldset>
+   <!-- <button type="button" onclick="addIncome()">Add Income</button> <span id="incomeTotalAmount">$0.00</span>
+-->
+    <fieldset>
+      <legend>Housing </legend>
+       <!-- Housing category -->
+      <div id="housingContainer" class="expenseItem">
+        <input type="text" name="housingName[]" placeholder="Mortgage/Rent" >
+
+        <input type="number" name="housingAmount[]" placeholder="$0.00" >
+        <p></p>
+        <input type="text" name="housingName[]" placeholder="Water" >
+
+        <input type="number" name="housingAmount[]" placeholder="$0.00" >
+        <p></p>
+        <input type="text" name="housingName[]" placeholder="Electricity" >
+
+        <input type="number" name="housingAmount[]" placeholder="$0.00" >
+      </div>
+
+    <div class="IncomeAndExpensesControls">
+      <p></p>
+      <button type="button" onclick="addExpense('housing')">Add Item</button>
+    <span id="housingTotalAmount">$0.00</span> 
+      </div>
+      <p></p>
+    </fieldset>
+    <fieldset>
+      <legend>Transportation </legend>
+      <!-- Transportation category -->
+      <div id="transportationContainer" class="expenseItem">
+        <input type="text" name="transportationName[]" placeholder="Gas">
+    
+        <input type="number" name="transportationAmount[]" placeholder="$0.00" >
+        <p></p>
+        <input type="text" name="transportationName[]"placeholder="Maintance" >
+     
+        <input type="number" name="transportationAmount[]" placeholder="$0.00">
+      </div>
+      <div class="IncomeAndExpensesControls">
+        <p></p>
+      <button type="button" onclick="addExpense('transportation')">Add Item</button>
+      <span id="transportationTotalAmount">$0.00</span> </div>
+      <p></p>
+    </fieldset>
+      <!-- Food category -->
+      <fieldset>
+        <legend>Food </legend>
+      <div id="foodContainer" class="expenseItem">
+        <input type="text" name="foodName[]" placeholder="Groceries">
+
+        <input type="number" name="foodAmount[]" placeholder="$0.00" >
+
+        <p></p>
+
+        <input type="text" name="foodName[]" placeholder="Restaurants">
+
+        <input type="number" name="foodAmount[]" placeholder="$0.00" >
+      </div>
+      <div class="IncomeAndExpensesControls">
+        <p></p>
+        <button type="button" onclick="addExpense('food')">Add Item</button>
+        <span id="foodTotalAmount">$0.00</span> 
+      </div>
+      <p></p>
+      </fieldset>
+      <!-- Subscriptions category -->
+      <fieldset>
+        <legend>Subscriptions </legend>
+      <div id="subscriptionsContainer" class="expenseItem">
+  
+        <input type="text" name="subscriptionsName[]" placeholder="Netflix">
+ 
+        <input type="number" name="subscriptionsAmount[]" placeholder="$0.00">
+        <p></p>
+        <input type="text" name="subscriptionsName[]"placeholder="Hulu" >
+     
+        <input type="number" name="subscriptionsAmount[]" placeholder="$0.00">
+      </div>
+      <div class="IncomeAndExpensesControls">
+        <p></p>
+        <button type="button" onclick="addExpense('subscriptions')">Add Item</button>
+        <span id="subscriptionsTotalAmount">$0.00</span> 
+       </div>
+      <p></p>
+      </fieldset>
+      <!-- Debt category -->
+      <fieldset>
+        <legend>Debt </legend>
+      <div id="debtContainer" class="expenseItem">
+    
+        <input type="text" name="debtName[]"placeholder="Car Payment" >
+     
+        <input type="number" name="debtAmount[]" placeholder="$0.00">
+        <p></p>
+        <input type="text" name="debtName[]"placeholder="Credit Card Payment" >
+     
+        <input type="number" name="debtAmount[]" placeholder="$0.00">
+      </div>
+
+      <div class="IncomeAndExpensesControls">
+        <p></p>
+        <button type="button" onclick="addExpense('debt')">Add Item</button>
+        <span id="debtTotalAmount">$0.00</span>
+      </div>
+      <p></p>
+      </fieldset>
+      <p></p>
+     <button type="submit" id="submitBigger">Submit Budget</button>
+     <p></p>
+  </form>
+  <div id="chart_div" style="width: 100%; height: 800px;"></div>
+  <script src="script.js"></script>
+  <script type="text/javascript">
+    // Load Google Charts and call drawChart
+    google.charts.load('current', {'packages': ['corechart']});
+  google.charts.setOnLoadCallback(function () {
+    // Call drawChart with the initial category totals from script.js
+    drawChart(categoryTotals);
+  });
+  </script>
+</body>
+</html>
